@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+  datasource:
+    url: ${TIDB_JDBC_URL}
+    username: ${TIDB_USER}
+    password: ${TIDB_PASS}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+app:
+  openai:
+    apiKey: ${OPENAI_API_KEY:}
+    baseUrl: ${OPENAI_BASE:https://api.openai.com/v1}
+    embeddingsModel: ${EMBEDDINGS_MODEL:text-embedding-3-large}
+    chatModel: ${CHAT_MODEL:gpt-4o-mini}
+  slack:
+    botToken: ${SLACK_BOT_TOKEN:}
+    channelId: ${SLACK_CHANNEL_ID:}
+  github:
+    token: ${GITHUB_TOKEN:}
+    repo: ${GITHUB_REPO:}
+  retrieval:
+    alphaVector: 0.75
+    betaKeyword: 0.2
+    gammaRecency: 0.05
+    topK: 12
